@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -16,7 +18,12 @@ public class Zadanie2OtherTest {
     @Before
     public void setup() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/Drivers/chromedriver.exe");
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--disable notifications");
+        DesiredCapabilities cp = new DesiredCapabilities();
+        cp.setCapability(ChromeOptions.CAPABILITY, options);
+        driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         driver.get("https://mystore-testlab.coderslab.pl");
@@ -39,8 +46,8 @@ public class Zadanie2OtherTest {
         signedHomePage.addItem();
 
         ItemPage itemPage = new ItemPage(driver);
-        itemPage.choosingItemSize("M");
-        itemPage.choosingQuantity(5);
+        itemPage.choosingItemSize("L");
+        itemPage.choosingQuantity(3);
         itemPage.addToCart();
         itemPage.proceedButton();
         itemPage.proceedButton2();
