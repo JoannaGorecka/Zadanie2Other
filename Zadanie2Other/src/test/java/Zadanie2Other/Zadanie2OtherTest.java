@@ -39,7 +39,7 @@ public class Zadanie2OtherTest {
         mainPage.signInButton();
 
         SignInPage signInPage = new SignInPage(driver);
-        signInPage.SignIn("aaaaa.bbbb@ccc.com", "Pass123");
+        signInPage.SignIn("kruszek99@gmail.com", "Pass123");
         signInPage.HomePage();
 
         SignedHomePage signedHomePage = new SignedHomePage(driver);
